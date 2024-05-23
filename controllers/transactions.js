@@ -3,14 +3,22 @@
 const transactionService = require("../services/transactionsService"); // Importa el nuevo servicio
 
 const getTransactions = async (req, res) => {
-  const { limite = 100, desde = 0, category, dateFrom, dateTo } = req.query;
+  const {
+    limite = 100,
+    desde = 0,
+    category,
+    dateFrom,
+    dateTo,
+    user,
+  } = req.query;
   try {
     const transactions = await transactionService.getTransactions(
       limite,
       desde,
       category,
       dateFrom,
-      dateTo
+      dateTo,
+      user
     );
     res.json({ data: transactions });
   } catch (error) {
@@ -25,7 +33,7 @@ const addTransaction = async (req, res) => {
     res.json({ data: savedTransaction });
   } catch (error) {
     console.error("Controller error:", error.message);
-    res.status(500).json({ msg: "Couldn't save the transaction" });
+    res.status(500).json({ msg: error.message });
   }
 };
 

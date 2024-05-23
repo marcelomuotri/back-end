@@ -11,7 +11,6 @@ const isRoleValid = async (rol = "") => {
 
 const emailExist = async (email = "") => {
   const existeEmail = await Usuario.findOne({ email }); // con esto buscamos si en Usuario existe ese correo
-  console.log(existeEmail, "existeEmail");
   if (existeEmail) {
     throw new Error(`Este correo ya esta registrado`);
   }

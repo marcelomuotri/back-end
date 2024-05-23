@@ -15,6 +15,17 @@ const getCategories = async (req, res) => {
   }
 };
 
+const addCategory = async (req, res) => {
+  try {
+    const savedCategory = await categoryService.addCategory(req.body);
+    res.json({ data: savedCategory });
+  } catch (error) {
+    console.error("Controller error:", error.message);
+    res.status(500).json({ msg: error.message });
+  }
+};
+
 module.exports = {
   getCategories,
+  addCategory,
 };

@@ -26,6 +26,12 @@ class Server {
   }
 
   middlewares() {
+    const corsOptions = {
+      origin: "http://localhost:5173", // Asegúrate de que este sea el origen correcto de tu frontend
+      credentials: true, // Esto es crucial si tu frontend envía credenciales como cookies
+      optionsSuccessStatus: 200, // Algunos navegadores más antiguos (IE11, varios Smart TVs) se ahogan con 204
+    };
+
     this.app.use(cors());
 
     //con este convertimos la info que nos mandan a json

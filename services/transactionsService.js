@@ -7,7 +7,8 @@ const getTransactions = async (
   offset = 0,
   category,
   dateFrom,
-  dateTo
+  dateTo,
+  user
 ) => {
   const query = {};
 
@@ -24,6 +25,11 @@ const getTransactions = async (
       query.transactionDate.$lte = new Date(dateTo);
     }
   }
+
+  if (!user) {
+    throw new Error("falta el user!");
+  }
+  query.user = user;
 
   try {
     const transactions = await Transaction.find(query)
